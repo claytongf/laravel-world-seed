@@ -1,6 +1,6 @@
 <?php
 
-namespace Claytongf\Console\Commands;
+namespace Claytongf\WorldSeed\Commands;
 
 use Claytongf\Traits\HasCountries;
 use Claytongf\Traits\SetupSeed;

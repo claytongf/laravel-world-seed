@@ -1,6 +1,6 @@
 <?php
 
-namespace Claytongf\Providers;
+namespace Claytongf\WorldSeed\Providers;
 
 use Claytongf\Console\Commands\WorldAddCountryCommand;
 use Claytongf\Console\Commands\WorldSeedCommand;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Claytongf\Models;
+namespace Claytongf\WorldSeed\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

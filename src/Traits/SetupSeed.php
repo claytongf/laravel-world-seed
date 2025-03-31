@@ -1,6 +1,6 @@
 <?php
 
-namespace Claytongf\Traits;
+namespace Claytongf\WorldSeed\Traits;
 
 trait SetupSeed
 {

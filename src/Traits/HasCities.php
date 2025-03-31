@@ -1,6 +1,6 @@
 <?php
 
-namespace Claytongf\Traits;
+namespace Claytongf\WorldSeed\Traits;
 
 use Claytongf\Models\City;
 use Claytongf\Models\State;
