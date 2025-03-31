@@ -8,34 +8,34 @@ use Illuminate\Support\ServiceProvider;
 
 class WorldSeedServiceProvider extends ServiceProvider
 {
-    /**
+    /*
      * Register services.
      */
     public function register(): void
     {
         /* Merge Configurations */
         $this->mergeConfigFrom(
-            __DIR__ . '/config/world.php',
+            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'world.php',
             'world'
         );
     }
 
-    /**
+    /*
      * Bootstrap services.
      */
     public function boot(): void
     {
         /* Load migrations */
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations');
 
         /* Publish the configurations */
         $this->publishes([
-            __DIR__ . '/config/world.php' => config_path('world.php'),
+            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'world.php' => config_path('world.php'),
         ], 'config');
 
         /* Publish JSON files */
         $this->publishes([
-            __DIR__ . '/database/json' => database_path('json'),
+            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'json' => database_path('json'),
         ], 'json');
 
         /* Register the Commands */
