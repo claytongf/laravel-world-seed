@@ -34,6 +34,7 @@ class WorldSeedCommand extends Command
      */
     public function __construct()
     {
+        $this->setBasePath();
         $this->setTotalCountries();
         $this->setNumberOfFiles();
         parent::__construct();

@@ -33,11 +33,6 @@ class WorldSeedServiceProvider extends ServiceProvider
             __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'world.php' => config_path('world.php'),
         ], 'config');
 
-        /* Publish JSON files */
-        $this->publishes([
-            __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'json' => database_path('json'),
-        ], 'json');
-
         /* Register the Commands */
         if ($this->app->runningInConsole()) {
             $this->commands([

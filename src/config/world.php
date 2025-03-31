@@ -2,12 +2,12 @@
 
 return [
     'models' => [
-        'country' => Claytongf\Models\Country::class,
-        'state' => Claytongf\Models\State::class,
-        'city' => Claytongf\Models\City::class,
-        'currency' => Claytongf\Models\Currency::class,
-        'language' => Claytongf\Models\Language::class,
-        'timezone' => Claytongf\Models\Timezone::class,
+        'country' => Claytongf\WorldSeed\Country::class,
+        'state' => Claytongf\WorldSeed\State::class,
+        'city' => Claytongf\WorldSeed\City::class,
+        'currency' => Claytongf\WorldSeed\Currency::class,
+        'language' => Claytongf\WorldSeed\Language::class,
+        'timezone' => Claytongf\WorldSeed\Timezone::class,
     ],
 
     /*
