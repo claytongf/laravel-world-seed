@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Claytongf\\WorldSeed\\WorldSeedServiceProvider"
+                "Claytongf\\WorldSeed\\Providers\\WorldSeedServiceProvider"
             ]
         }
     },

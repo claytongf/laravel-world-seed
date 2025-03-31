@@ -2,7 +2,7 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\Language;
+use Claytongf\WorldSeed\Models\Language;
 
 trait HasLanguages
 {

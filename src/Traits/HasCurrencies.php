@@ -2,7 +2,7 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\Currency;
+use Claytongf\WorldSeed\Models\Currency;
 
 trait HasCurrencies
 {

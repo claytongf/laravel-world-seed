@@ -2,8 +2,8 @@
 
 namespace Claytongf\WorldSeed\Providers;
 
-use Claytongf\Console\Commands\WorldAddCountryCommand;
-use Claytongf\Console\Commands\WorldSeedCommand;
+use Claytongf\WorldSeed\Commands\WorldAddCountryCommand;
+use Claytongf\WorldSeed\Commands\WorldSeedCommand;
 use Illuminate\Support\ServiceProvider;
 
 class WorldSeedServiceProvider extends ServiceProvider

@@ -2,7 +2,7 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\Country;
+use Claytongf\WorldSeed\Models\Country;
 
 trait HasCountries
 {

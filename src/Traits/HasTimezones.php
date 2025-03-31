@@ -2,7 +2,7 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\Timezone;
+use Claytongf\WorldSeed\Models\Timezone;
 
 trait HasTimezones
 {

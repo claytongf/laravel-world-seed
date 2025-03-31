@@ -2,8 +2,8 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\City;
-use Claytongf\Models\State;
+use Claytongf\WorldSeed\Models\City;
+use Claytongf\WorldSeed\Models\State;
 
 trait HasCities
 {

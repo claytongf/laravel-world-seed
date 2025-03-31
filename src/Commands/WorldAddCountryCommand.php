@@ -2,8 +2,8 @@
 
 namespace Claytongf\WorldSeed\Commands;
 
-use Claytongf\Traits\HasCountries;
-use Claytongf\Traits\SetupSeed;
+use Claytongf\WorldSeed\Traits\HasCountries;
+use Claytongf\WorldSeed\Traits\SetupSeed;
 use Illuminate\Console\Command;
 
 class WorldAddCountryCommand extends Command

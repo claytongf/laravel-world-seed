@@ -2,8 +2,8 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
-use Claytongf\Models\Country;
-use Claytongf\Models\State;
+use Claytongf\WorldSeed\Models\Country;
+use Claytongf\WorldSeed\Models\State;
 
 trait HasStates
 {
