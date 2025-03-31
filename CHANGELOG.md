@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.7
+
+- Countries translations are now in the new Model Translation. They are no longer in json field into Country Model
+- Fix support for MySQL and PostgreSQL
+
 ## v0.1.6
 
 - List countries to seed configuration option is set to [] as default option
