@@ -2,6 +2,8 @@
 
 namespace Claytongf\WorldSeed\Traits;
 
+use Claytongf\WorldSeed\Exceptions\FileNotFoundException;
+
 trait SetupSeed
 {
     /**
@@ -79,8 +81,8 @@ trait SetupSeed
                 return json_decode(file_get_contents($fallbackPath), true);
             }
 
-            throw new \Exception("Arquivo cities{$index}.json não encontrado. Caminhos verificados: 
-            1. {$jsonPath} 
+            throw new FileNotFoundException("Arquivo cities{$index}.json não encontrado. Caminhos verificados:
+            1. {$jsonPath}
             2. {$fallbackPath}");
         }
 
