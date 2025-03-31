@@ -1,0 +1,32 @@
+{
+    "name": "claytongf/laravel-world-seed",
+    "description": "A Laravel package that contains information about countries, states, cities, currencies, languages and timezones",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Clayton Figueiredo",
+            "email": "claytongf@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/claytongf/laravel-world-seed",
+    "autoload": {
+        "psr-4": {
+            "Claytongf\\WorldSeed\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Claytongf\\WorldSeed\\WorldSeedServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
