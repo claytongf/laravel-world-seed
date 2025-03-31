@@ -52,7 +52,7 @@ return [
     *   You CAN mix both code types.
     */
 
-    'list_countries_to_seed' => ['BRA'],
+    'list_countries_to_seed' => [],
 
     /*
     *   Set show_progress_bar to true if you would like to see the progress bar while
