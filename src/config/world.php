@@ -8,6 +8,7 @@ return [
         'currency' => Claytongf\WorldSeed\Currency::class,
         'language' => Claytongf\WorldSeed\Language::class,
         'timezone' => Claytongf\WorldSeed\Timezone::class,
+        'translation' => Claytongf\WorldSeed\Translation::class
     ],
 
     /*
@@ -21,6 +22,7 @@ return [
         'currencies' => 'currencies',
         'languages' => 'languages',
         'timezones' => 'timezones',
+        'translations' => 'translations',
         'relationship' => [
             'countries_currencies' => 'countries_currencies',
             'countries_languages' => 'countries_languages',
@@ -40,6 +42,7 @@ return [
             'currency_id' => 'currency_id',
             'language_id' => 'language_id',
             'timezone_id' => 'timezone_id',
+            'translation_id' => 'translation_id'
         ]
     ],
 
@@ -106,4 +109,9 @@ return [
 
     'timezones' => true,
 
+    /*
+    *   Set translations to true if you want to seed them.
+    */
+
+    'translations' => true,
 ];

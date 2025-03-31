@@ -1,6 +1,6 @@
 # World Seed Package for Laravel
 
-A Laravel package that contains information about countries, states, cities, currencies, languages and timezones
+A Laravel package that contains information about countries, states, cities, currencies, languages, countries translations and timezones
 
 ## Installation
 
@@ -31,8 +31,7 @@ php artisan migrate
 After publishing the provider, you may access the world.php config file.
 You can customize the table names, relationship table names, relationship column names, also list countries to seed, show progress bar and see countries that are being processed.
 
-> [!NOTE]
-> _Currently, you cannot customize which model to seed. It will be done in future releases. So, setting 'countries' or other models to true or false will not affect seeding._
+> [!NOTE] > _Currently, you cannot customize which model to seed. It will be done in future releases. So, setting 'countries' or other models to true or false will not affect seeding._
 
 ## Available Commands
 
@@ -88,6 +87,7 @@ For now, the data will be fetched according to Laravel's default behavior.
 - Currency
 - Language
 - Timezone
+- Translation
 
 ### Relationships
 
@@ -100,12 +100,15 @@ For now, the data will be fetched according to Laravel's default behavior.
   - BelongsToMany Currency
   - BelongsToMany Language
   - BelongsToMany Timezone
+  - HasMany Translation
 - Currency
   - BelongsToMany Country
 - Language
   - BelongsToMany Country
 - Timezone
   - BelongsToMany Country
+- Translation
+  - BelongsTo Country
 
 Any suggestions will be very welcome.
 
@@ -119,6 +122,7 @@ This package is in its first version. Any suggestions will be very welcome.
 - Languages would not be required
 - Timezones would not be required
 - Currencies would not be required
+- Translations would not be required
 - Retrieving data improvements
 
 ## Buy me a Coffee..... or Pizza

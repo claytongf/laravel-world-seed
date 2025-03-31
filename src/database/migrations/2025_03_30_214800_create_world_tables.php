@@ -23,15 +23,16 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('native_name');
             $table->string('official_name');
-            $table->tinyInteger('phone_code');
+            $table->unsignedSmallInteger('phone_code');
             $table->string('capital')->nullable();
             $table->string('iso2', 2);
             $table->string('iso3', 3);
             $table->string('numeric_code', 3);
-            $table->json('translations');
             $table->string('region');
             $table->string('subregion');
             $table->string('flag_url');
+            $table->unique(['iso2', 'iso3', 'numeric_code']);
+            $table->unique(['name', 'native_name', 'official_name']);
             $table->timestamps();
         });
 
@@ -39,7 +40,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name', 80);
             $table->string('code', 4);
-            $table->string('symbol', 2);
+            $table->string('symbol', 8);
             $table->unique(['name', 'code', 'symbol']);
             $table->timestamps();
         });
@@ -47,7 +48,7 @@ return new class () extends Migration {
         Schema::create($tableNames['states'], function (Blueprint $table) {
             $table->id();
             $table->string('name', 80);
-            $table->string('state_code', 3)->nullable();
+            $table->string('state_code', 6)->nullable();
             $table->string('type')->nullable();
             $table->foreignId(config('world.column_names.relationship.country_id'))
                 ->constrained(config('world.table_names.countries'))->cascadeOnDelete()->cascadeOnUpdate();
@@ -70,6 +71,17 @@ return new class () extends Migration {
             $table->id();
             $table->string('name', 40);
             $table->string('code', 3);
+            $table->unique(['name', 'code']);
+            $table->timestamps();
+        });
+
+        Schema::create($tableNames['translations'], function (Blueprint $table) {
+            $table->id();
+            $table->string('language', 5);
+            $table->string('country_name');
+            $table->foreignId(config('world.column_names.relationship.country_id'))
+                ->constrained(config('world.table_names.countries'))->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['language', 'country_name', config('world.column_names.relationship.country_id')]);
             $table->timestamps();
         });
 
@@ -77,7 +89,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name', 9);
             $table->string('zone_name', 30)->unique();
-            $table->string('abbreviation', 3);
+            $table->string('abbreviation', 5);
             $table->string('tz_name', 60);
             $table->timestamps();
         });
@@ -118,6 +130,7 @@ return new class () extends Migration {
         Schema::dropIfExists($tableNames['relationship']['countries_currencies']);
         Schema::dropIfExists($tableNames['relationship']['countries_languages']);
         Schema::dropIfExists($tableNames['relationship']['countries_timezones']);
+        Schema::dropIfExists($tableNames['translations']);
         Schema::dropIfExists($tableNames['timezones']);
         Schema::dropIfExists($tableNames['languages']);
         Schema::dropIfExists($tableNames['cities']);

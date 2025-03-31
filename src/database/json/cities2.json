@@ -48625,10 +48625,10 @@
             {
                 "id": 5252,
                 "name": "Cayman Brac",
-                "state_code": "NULL",
+                "state_code": null,
                 "latitude": "19.71999700",
                 "longitude": "-79.89072660",
-                "type": "NULL",
+                "type": null,
                 "cities": [
                     {
                         "id": 153943,
@@ -48641,10 +48641,10 @@
             {
                 "id": 5251,
                 "name": "Grand Cayman",
-                "state_code": "NULL",
+                "state_code": null,
                 "latitude": "19.33012710",
                 "longitude": "-81.41724510",
-                "type": "NULL",
+                "type": null,
                 "cities": [
                     {
                         "id": 153938,
@@ -48681,10 +48681,10 @@
             {
                 "id": 5253,
                 "name": "Little Cayman",
-                "state_code": "NULL",
+                "state_code": null,
                 "latitude": "19.68567390",
                 "longitude": "-80.11830190",
-                "type": "NULL",
+                "type": null,
                 "cities": [
                     {
                         "id": 153944,

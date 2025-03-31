@@ -4,6 +4,7 @@ namespace Claytongf\WorldSeed\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
@@ -20,6 +21,20 @@ class Country extends Model
         'region',
         'subregion',
         'flag_url'
+    ];
+
+    protected $casts = [
+        'name' => 'string',
+        'official_name' => 'string',
+        'native_name' => 'string',
+        'phone_code' => 'integer',
+        'capital' => 'string',
+        'iso2' => 'string',
+        'iso3' => 'string',
+        'numeric_code' => 'string',
+        'region' => 'string',
+        'subregion' => 'string',
+        'flag_url' => 'string'
     ];
 
     public function __construct(array $attributes = [])
@@ -56,5 +71,10 @@ class Country extends Model
             config('world.column_names.relationship.country_id'),
             config('world.column_names.relationship.timezone_id')
         );
+    }
+
+    public function translations(): HasMany
+    {
+        return $this->hasMany(Translation::class, config('world.column_names.relationship.country_id'));
     }
 }

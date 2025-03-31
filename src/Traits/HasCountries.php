@@ -10,6 +10,7 @@ trait HasCountries
     use HasTimezones;
     use HasCurrencies;
     use HasLanguages;
+    use HasTranslations;
 
     /**
      * Save countries to the database
@@ -30,9 +31,9 @@ trait HasCountries
             'numeric_code' => $country['numeric_code'],
             'region' => $country['region'],
             'subregion' => $country['subregion'],
-            'translations' => json_encode($country['translations']),
             'flag_url' => $country['flags']['png'],
         ]);
+        $this->saveTranslations($country['translations'], $countryCreated->id);
         $currencies = $this->saveCurrencies($country);
         $languages = $this->saveLanguages($country['languages']);
         $timezones = $this->saveTimezones($country['timezones']);
