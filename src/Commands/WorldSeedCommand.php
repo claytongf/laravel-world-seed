@@ -24,13 +24,10 @@ class WorldSeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Seed world information, with currencies, countries, states, cities, timezones and languages';
+    protected $description = 'Seed world information, with currencies, countries, states, cities, timezones, languages and translations';
 
     /**
      * Constructor
-     *
-     * @param int $totalCountries Total number of countries to be seeded. If not provided, the total number of countries
-     *                            in the list of countries to seed will be used. If the list is empty, 250 will be used.
      */
     public function __construct()
     {
@@ -45,12 +42,15 @@ class WorldSeedCommand extends Command
      */
     public function handle()
     {
+        $teste = '';
         try {
             $this->startingTime = microtime(true);
             if (config('world.show_progress_bar')) {
                 $progress = $this->output->createProgressBar($this->totalCountries);
                 $progress->start();
             }
+
+            dd($teste, $this->numberOfFiles);
 
             for ($i = 1; $i <= $this->numberOfFiles; $i++) {
                 foreach ($this->getCountries($i) as $country) {

@@ -73,11 +73,51 @@ php artisan world:add-country USA
 php artisan world:add-country USA MEX CAN
 ```
 
+- You can mix ISO2 and ISO3 codes as well
+
+```bash
+php artisan world:add-country BR MEX FR ESP
+```
+
 If a country that you wanted to seed is already in the database, it will not duplicate.
+
+### Remove Specific Country
+
+- You can remove any country from the database using ISO2 and/or ISO3 codes.
+
+```bash
+php artisan world:remove-country CAN
+```
+
+or
+
+```bash
+php artisan world:add-country CA
+```
+
+- You can also remove more than one country at once.
+
+```bash
+php artisan world:remove-country CAN BRA MEX
+```
+
+or
+
+```bash
+php artisan world:add-country CA BR MX
+```
+
+- You can mix ISO2 and ISO3 codes as well
+
+```bash
+php artisan world:add-country BR MEX FR ESP
+```
+
+If a country is already removed, it will not affect the other countries removal. Per example: if you want to remove the countries with MX, CA and BR codes, but MX has already been removed before, the command will ignore the removed country and continue to remove the other ones.
 
 ## Retrieving Data
 
-For now, the data will be fetched according to Laravel's default behavior.
+For now, the data can be fetched according to Laravel's default behavior. New methods will be released in future versions.
 
 ### Models Available
 

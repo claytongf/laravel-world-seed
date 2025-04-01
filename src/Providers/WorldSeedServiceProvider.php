@@ -3,6 +3,7 @@
 namespace Claytongf\WorldSeed\Providers;
 
 use Claytongf\WorldSeed\Commands\WorldAddCountryCommand;
+use Claytongf\WorldSeed\Commands\WorldRemoveCountryCommand;
 use Claytongf\WorldSeed\Commands\WorldSeedCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,7 +38,8 @@ class WorldSeedServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 WorldSeedCommand::class,
-                WorldAddCountryCommand::class
+                WorldAddCountryCommand::class,
+                WorldRemoveCountryCommand::class,
             ]);
         }
     }

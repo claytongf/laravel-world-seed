@@ -23,7 +23,7 @@ class WorldAddCountryCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Migrate specific countries to the database';
+    protected $description = 'Add specific countries to the database';
 
     /**
      * Constructor
@@ -33,7 +33,7 @@ class WorldAddCountryCommand extends Command
      */
     public function __construct()
     {
-        $this->setTotalCountries();
+        $this->setBasePath();
         $this->setNumberOfFiles();
         parent::__construct();
     }
@@ -43,14 +43,44 @@ class WorldAddCountryCommand extends Command
      */
     public function handle()
     {
-        $codes = $this->argument('codes');
-        dd($codes);
-    }
+        try {
+            $codes = $this->argument('codes');
+            $this->setTotalCountries($codes);
+            $this->startingTime = microtime(true);
+            if (config('world.show_progress_bar')) {
+                $progress = $this->output->createProgressBar($this->totalCountries);
+                $progress->start();
+            }
 
-    protected function promptForMissingArgumentsUsing()
-    {
-        return [
-            'codes*' => 'Please enter the ISO2 or ISO3 codes of the countries you want to migrate',
-        ];
+            for ($i = 1; $i <= $this->numberOfFiles; $i++) {
+                foreach ($this->getCountries($i) as $country) {
+                    if (empty($codes) ||
+                    in_array($country['iso2'], $codes) ||
+                    in_array($country['iso3'], $codes)
+                    ) {
+                        if (config('world.show_countries_seeding_progress')) {
+                            $this->newLine();
+                            $this->info("Seeding country: {$country['name']}");
+                        }
+                        if (!$this->saveCountries($country)) {
+                            $this->alert("Country {$country['name']} already exists.");
+                        }
+
+                        if (isset($progress) && config('world.show_progress_bar')) {
+                            $progress->advance();
+                        }
+                        $this->newLine();
+                    }
+                }
+            }
+            $progress->finish();
+
+            $this->finishedTime = microtime(true);
+            $time = number_format(($this->finishedTime - $this->startingTime), 2);
+
+            $this->info("World seed completed successfully! Command took $time seconds.");
+        } catch (Exception $e) {
+            $this->fail($e->getMessage());
+        }
     }
 }

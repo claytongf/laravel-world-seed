@@ -15,11 +15,15 @@ trait HasCountries
     /**
      * Save countries to the database
      *
-     * @param array $country
-     * @return void
+     * @param array<string, mixed> $country
+     * @return bool
      */
-    private function saveCountries(array $country): void
+    private function saveCountries(array $country): bool
     {
+        if ($this->findCountryByCodes($country['iso2'], $country['iso3'])) {
+            return false;
+        }
+        /** @var Country */
         $countryCreated = Country::firstOrCreate([
             'name' => $country['name'],
             'native_name' => $country['native'],
@@ -42,5 +46,11 @@ trait HasCountries
         $countryCreated->timezones()->attach($timezones);
 
         $this->saveStates($country['states'], $countryCreated);
+        return true;
+    }
+
+    private function findCountryByCodes($iso2, $iso3)
+    {
+        return Country::where('iso2', $iso2)->orWhere('iso3', $iso3)->exists();
     }
 }

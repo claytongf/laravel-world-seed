@@ -42,10 +42,15 @@ trait SetupSeed
      * If the list of countries to seed is not empty, the total number of countries
      * in the list will be used. Otherwise, 250 will be used.
      */
-    private function setTotalCountries(): void
+    private function setTotalCountries(array|null $countries = null): void
     {
-        $this->totalCountries = count(config('world.list_countries_to_seed')) > 0
-            ? count(config('world.list_countries_to_seed')) : 250;
+        if ($countries) {
+            $this->totalCountries = count($countries);
+        } elseif (count(config('world.list_countries_to_seed')) > 0) {
+            $this->totalCountries = count(config('world.list_countries_to_seed'));
+        } else {
+            $this->totalCountries = 250;
+        }
     }
 
     private function setBasePath(): void

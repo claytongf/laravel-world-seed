@@ -1,11 +1,19 @@
 # Changelog
 
+## v1.0.0
+
+- First Release as it should be
+- World Remove command has been added.
+- World Add Command fixed
+
+**Full Changelog**: [v0.1.7...v1.0.0](https://github.com/claytongf/laravel-world-seed/compare/v0.1.7...v1.0.0)
+
 ## v0.1.7
 
 - Countries translations are now in the new Model Translation. They are no longer in json field into Country Model
 - Fix support for MySQL and PostgreSQL
 
-**Full Changelog**: [v0.1.5...v0.1.6](https://github.com/claytongf/laravel-world-seed/compare/v0.1.6...v0.1.7)
+**Full Changelog**: [v0.1.6...v0.1.7](https://github.com/claytongf/laravel-world-seed/compare/v0.1.6...v0.1.7)
 
 ## v0.1.6
 
