@@ -42,15 +42,12 @@ class WorldSeedCommand extends Command
      */
     public function handle()
     {
-        $teste = '';
         try {
             $this->startingTime = microtime(true);
             if (config('world.show_progress_bar')) {
                 $progress = $this->output->createProgressBar($this->totalCountries);
                 $progress->start();
             }
-
-            dd($teste, $this->numberOfFiles);
 
             for ($i = 1; $i <= $this->numberOfFiles; $i++) {
                 foreach ($this->getCountries($i) as $country) {
