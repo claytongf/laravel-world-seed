@@ -16,7 +16,7 @@ class WorldAddCountryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'world:add-country {codes* : ISO2 or ISO3 codes}';
+    protected $signature = 'world:add-country {codes?* : ISO2 or ISO3 codes}';
 
     /**
      * The console command description.
@@ -27,15 +27,20 @@ class WorldAddCountryCommand extends Command
 
     /**
      * Constructor
-     *
-     * @param int $totalCountries Total number of countries to be seeded. If not provided, the total number of countries
-     *                            in the list of countries to seed will be used. If the list is empty, 250 will be used.
      */
     public function __construct()
     {
         $this->setBasePath();
-        $this->setNumberOfFiles();
+        $this->setNumberOfFiles(fileName: 'cities', fileType: 'json');
         parent::__construct();
+    }
+
+    public function getCodes(): array
+    {
+        if (empty($this->argument('codes'))) {
+            return config('world.list_airports_to_seed');
+        }
+        return array_map('strtoupper', $this->argument('codes'));
     }
 
     /**
@@ -44,21 +49,20 @@ class WorldAddCountryCommand extends Command
     public function handle()
     {
         try {
-            $codes = $this->argument('codes');
+            $codes = $this->getCodes();
             $this->setTotalCountries($codes);
             $this->startingTime = microtime(true);
             if (config('world.show_progress_bar')) {
                 $progress = $this->output->createProgressBar($this->totalCountries);
                 $progress->start();
             }
-
             for ($i = 1; $i <= $this->numberOfFiles; $i++) {
                 foreach ($this->getCountries($i) as $country) {
                     if (empty($codes) ||
                     in_array($country['iso2'], $codes) ||
                     in_array($country['iso3'], $codes)
                     ) {
-                        if (config('world.show_countries_seeding_progress')) {
+                        if (config('world.show_seeding_progress')) {
                             $this->newLine();
                             $this->info("Seeding country: {$country['name']}");
                         }

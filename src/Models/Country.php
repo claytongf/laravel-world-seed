@@ -43,6 +43,8 @@ class Country extends Model
         $this->table = config('world.table_names.countries');
     }
 
+    /************** RELATIONSHIPS ***************/
+
     public function languages(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -76,5 +78,12 @@ class Country extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(Translation::class, config('world.column_names.relationship.country_id'));
+    }
+
+    /****************** SCOPES *****************/
+
+    public function scopeByIso($query, string $iso2, string|null $iso3 = null): void
+    {
+        $query->where('iso2', $iso2)->orWhere('iso3', $iso3 ? $iso3 : $iso2);
     }
 }

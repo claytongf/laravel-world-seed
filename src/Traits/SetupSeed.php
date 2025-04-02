@@ -34,6 +34,13 @@ trait SetupSeed
      */
     private int $totalCountries;
 
+    /**
+     * Total Airports to Seed
+     *
+     * @var integer
+     */
+    private int $totalAirports;
+
     private $basePath;
 
     /**
@@ -68,9 +75,9 @@ trait SetupSeed
      * that match the pattern 'cities*.json' and assigns the count to the
      * $numberOfFiles property.
      */
-    private function setNumberOfFiles(): void
+    private function setNumberOfFiles(string $fileName, string $fileType): void
     {
-        $files = glob("$this->basePath/database/json/cities*.json");
+        $files = glob("$this->basePath/database/$fileType/$fileName*.$fileType");
         $this->numberOfFiles = count($files);
     }
 
@@ -92,5 +99,57 @@ trait SetupSeed
         }
 
         return json_decode(file_get_contents($jsonPath), true);
+    }
+
+    private function getAirports($index): array
+    {
+        $file = "{$this->basePath}/database/csv/airports{$index}.csv";
+
+        if (!file_exists($file)) {
+            throw new FileNotFoundException("File airports{$index}.csv does not exist. Paths checked:
+            {$file}");
+        }
+
+        $csv = fopen($file, 'r');
+        fgetcsv($csv);
+        $airports = [];
+        while ($row = fgetcsv($csv)) {
+            $airports[] = $this->transformData($row);
+        }
+        fclose($csv);
+
+        return $airports;
+    }
+
+    protected function transformData(array $data): array
+    {
+        return [
+            'ident' => $this->cleanString($data[0]),
+            'type' => $this->cleanString($data[1]),
+            'name' => $this->cleanString($data[2]),
+            'latitude' => $data[3],
+            'longitude' => $data[4],
+            'elevation_ft' => $data[5] !== '\\N' ? (int)$data[5] : null,
+            'continent' => $this->cleanString($data[6]),
+            'iso_country' => $this->cleanString($data[7]),
+            'iso_region' => $this->cleanString($data[8]),
+            'city' => $this->cleanString($data[9]),
+            'icao' => $this->cleanString($data[10]),
+            'iata' => $this->cleanString($data[11]),
+            'gps_code' => $this->cleanString($data[12]),
+            'local_code' => $this->cleanString($data[13]),
+        ];
+    }
+
+    /**
+     * Clean and format string values from CSV
+     */
+    protected function cleanString(?string $value): ?string
+    {
+        if ($value === null || $value === '\\N' || $value === '') {
+            return null;
+        }
+
+        return trim($value, '" ');
     }
 }

@@ -51,6 +51,6 @@ trait HasCountries
 
     private function findCountryByCodes($iso2, $iso3)
     {
-        return Country::where('iso2', $iso2)->orWhere('iso3', $iso3)->exists();
+        return Country::byIso($iso2, $iso3)->exists();
     }
 }

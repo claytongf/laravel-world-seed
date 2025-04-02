@@ -1,6 +1,6 @@
 {
     "name": "claytongf/laravel-world-seed",
-    "description": "A Laravel package that contains information about countries, states, cities, currencies, languages and timezones",
+    "description": "A Laravel package that contains information about countries, states, cities, airports, currencies, languages and timezones",
     "type": "library",
     "license": "MIT",
     "authors": [

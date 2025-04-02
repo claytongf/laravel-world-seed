@@ -2,12 +2,12 @@
 
 namespace Claytongf\WorldSeed\Commands;
 
-use Claytongf\WorldSeed\Models\Country;
 use Claytongf\WorldSeed\Traits\HasCountries;
 use Claytongf\WorldSeed\Traits\SetupSeed;
+use Claytongf\WorldSeed\Models\Airport;
 use Illuminate\Console\Command;
 
-class WorldRemoveCountryCommand extends Command
+class WorldRemoveAirportCommand extends Command
 {
     use SetupSeed;
     use HasCountries;
@@ -17,14 +17,14 @@ class WorldRemoveCountryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'world:remove-country {codes* : ISO2 or ISO3 codes}';
+    protected $signature = 'world:remove-airport {codes* : IATA or ICAO codes}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Remove specific countries to the database';
+    protected $description = 'Remove specific airports to the database';
 
     /**
      * Execute the console command.
@@ -42,9 +42,9 @@ class WorldRemoveCountryCommand extends Command
             foreach ($codes as $code) {
                 if (config('world.show_seeding_progress')) {
                     $this->newLine();
-                    $this->info("Removing country: {$code}");
+                    $this->info("Removing airport: {$code}");
                 }
-                Country::byIso($code)->delete();
+                Airport::where('iata', $code)->orWhere('icao', $code)->delete();
 
                 if (isset($progress) && config('world.show_progress_bar')) {
                     $progress->advance();
@@ -56,7 +56,7 @@ class WorldRemoveCountryCommand extends Command
             $this->finishedTime = microtime(true);
             $time = number_format(($this->finishedTime - $this->startingTime), 2);
 
-            $this->info("Countries removal completed successfully! Command took $time seconds.");
+            $this->info("Airport removal completed successfully! Command took $time seconds.");
         } catch (Exception $e) {
             $this->fail($e->getMessage());
         }

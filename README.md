@@ -1,10 +1,10 @@
 # World Seed Package for Laravel
 
-A Laravel package that contains information about countries, states, cities, currencies, languages, countries translations and timezones
+This Laravel package provides data about countries, states, cities, currencies, languages, airports, translations, and timezones.
 
 ## Installation
 
-### Install Through Composer
+### Install Using Composer
 
 ```bash
 composer require claytongf/laravel-world-seed
@@ -12,7 +12,7 @@ composer require claytongf/laravel-world-seed
 
 ### Laravel
 
-Copy the package config to your local config with the publish command:
+Publish the configuration file:
 
 ```bash
 php artisan vendor:publish --provider="Claytongf\\WorldSeed\\Providers\\WorldSeedServiceProvider"
@@ -20,7 +20,7 @@ php artisan vendor:publish --provider="Claytongf\\WorldSeed\\Providers\\WorldSee
 
 ### Migrations
 
-After publishing, you may create the migrations
+After publishing, you can run the migrations and the tables will be created.
 
 ```bash
 php artisan migrate
@@ -28,96 +28,98 @@ php artisan migrate
 
 ## Configurations
 
-After publishing the provider, you may access the world.php config file.
-You can customize the table names, relationship table names, relationship column names, also list countries to seed, show progress bar and see countries that are being processed.
+The config/world.php file (published in the previous step) allows customization of table names, relationship table names, relationship column names, countries to seed, progress bar display, and a list of countries being processed.
 
-> [!NOTE] > _Currently, you cannot customize which model to seed. It will be done in future releases. So, setting 'countries' or other models to true or false will not affect seeding._
+> [!NOTE] > _Model selection for seeding is not yet customizable and will be available in future releases. Setting 'countries' or other models to true or false will not affect seeding._
 
 ## Available Commands
 
 ### World Seed
 
-Seed entire database.
+Seed the entire database.
 
 > [!IMPORTANT]
-> You need to migrate first!
+> Run Migrations first!
 
 ```bash
-php artisan world:seed
+php artisan world:add-country
 ```
 
 > [!WARNING]
-> If you seed the entire json, keep in mind that it will take a while to seed.
+> Seeding the entire dataset can take a while.
 
 > [!TIP]
-> So, for faster seeding, you may execute the command below or add the country codes as you wish in the world.php config file.
+> For faster seeding, use the command below or specify country codes in the config/world.php file.
 
 ### Seed Specific Country
 
-If you didn't seed the entire database, you may add countries that still available for seeding.
+Add specific countries using their ISO2 or ISO3 codes:
 
 ```bash
-php artisan world:add-country US
+php artisan world:add-country US # or USA
+php artisan world:add-country USA MEX CAN # Multiple countries
+php artisan world:add-country BR MEX FR ESP # Mixed ISO2 and ISO3 codes
+
 ```
 
-or
-
-```bash
-php artisan world:add-country USA
-```
-
-- You can use ISO2 and/or ISO3 codes to add a country.
-- You also can add more than one country at once
-
-```bash
-php artisan world:add-country USA MEX CAN
-```
-
-- You can mix ISO2 and ISO3 codes as well
-
-```bash
-php artisan world:add-country BR MEX FR ESP
-```
-
-If a country that you wanted to seed is already in the database, it will not duplicate.
+Duplicate entries will be ignored.
 
 ### Remove Specific Country
 
-- You can remove any country from the database using ISO2 and/or ISO3 codes.
+Remove countries using their ISO2 or ISO3 codes:
 
 ```bash
-php artisan world:remove-country CAN
+php artisan world:remove-country CAN # or CA
+php artisan world:remove-country CAN BRA MEX # Multiple countries
+php artisan world:remove-country CA BR MX # Mixed ISO2 and ISO3 codes
 ```
 
-or
+Attempts to remove already removed countries will be ignored. For example, if you try to remove MX, CA, and BR, but MX has already been removed, the command will proceed to remove CA and BR.
+
+### Seed Airports
+
+Seed all the airports available.
+
+> [!IMPORTANT]
+> Seed countries first, otherwise no airports will be shown.
 
 ```bash
-php artisan world:add-country CA
+php artisan world:add-airport
 ```
 
-- You can also remove more than one country at once.
+> [!WARNING]
+> Seeding all airports can take a while, though less time than seeding countries.
+
+> [!TIP]
+> For faster seeding, use the command below or specify airport codes in the config/world.php file.
+
+### Seed Specific Airport
+
+Add specific airports using their IATA or ICAO codes:
 
 ```bash
-php artisan world:remove-country CAN BRA MEX
+php artisan world:add-airport YYZ # or CYYZ
+php artisan world:add-airport YYZ YYN ORL # Multiple airports
+php artisan world:add-airport CYYZ ORL CGH # Mixed IATA and ICAO codes
 ```
 
-or
+Duplicate entries will be ignored.
+
+### Remove Specific Airports
+
+Remove airports using their IATA or ICAO codes:
 
 ```bash
-php artisan world:add-country CA BR MX
+php artisan world:remove-airport YYZ # or CYYZ
+php artisan world:remove-airport YYZ YYN ORL # Multiple airports
+php artisan world:add-airport CYYZ CYYN CGH # Mixed IATA and ICAO codes
 ```
 
-- You can mix ISO2 and ISO3 codes as well
-
-```bash
-php artisan world:add-country BR MEX FR ESP
-```
-
-If a country is already removed, it will not affect the other countries removal. Per example: if you want to remove the countries with MX, CA and BR codes, but MX has already been removed before, the command will ignore the removed country and continue to remove the other ones.
+If an airport is already removed, it will not affect the other airports removal. Per example: if you want to remove the airports with YYZ, YYN and ORL codes, but ORL has already been removed before, the command will ignore the removed airport and continue to remove the other ones.
 
 ## Retrieving Data
 
-For now, the data can be fetched according to Laravel's default behavior. New methods will be released in future versions.
+Data retrieval currently follows standard Laravel conventions. Improved methods will be implemented in future versions.
 
 ### Models Available
 
@@ -128,12 +130,14 @@ For now, the data can be fetched according to Laravel's default behavior. New me
 - Language
 - Timezone
 - Translation
+- Airport
 
 ### Relationships
 
 - City
   - BelongsTo State
   - BelongsTo Country
+  - BelongsToMany Airport
 - State
   - BelongsTo Country
 - Country
@@ -149,21 +153,25 @@ For now, the data can be fetched according to Laravel's default behavior. New me
   - BelongsToMany Country
 - Translation
   - BelongsTo Country
+- Airport
+  - BelongsToMany City
 
-Any suggestions will be very welcome.
+Suggestions are welcome!
 
 ## Package in development
 
-This package is in its first version. Any suggestions will be very welcome.
+This package is currently in its initial version. All suggestions are welcome.
+
+## Data Integrity
+
+> [!IMPORTANT]
+> The dataset may contain inconsistencies, such as airports not linked to any city. Due to the volume of data, addressing all such issues may be time-consuming. Please report any inconsistencies you encounter.
 
 ## Future Implementations
 
-- Seed Countries, States or Cities only
-- Languages would not be required
-- Timezones would not be required
-- Currencies would not be required
-- Translations would not be required
-- Retrieving data improvements
+- Seeding Countries, States, or Cities individually
+- Optional seeding of Languages, Timezones, Currencies, and Translations
+- Improved data retrieval methods
 
 ## Buy me a Coffee..... or Pizza
 

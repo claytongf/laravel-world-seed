@@ -1,60 +1,71 @@
 # Changelog
 
+## v1.1.0
+
+- Added airport support.
+- Removed `world:seed` command. To seed the entire country database, use the `world:add-country` command without parameters.
+- Added city/airport relationship.
+- Added `ByIsoCode` scope to the `Country` model.
+- Airport data is now imported from a CSV file.
+- Added `list_airports_to_seed` option to the `world.php` config file.
+
+**Full Changelog**: [v1.0.1...v1.1.0](https://github.com/claytongf/laravel-world-seed/compare/v1.0.1...v1.1.0)
+
 ## v1.0.1
 
-- dd() method removed.
+- Removed `dd()` method.
 
 **Full Changelog**: [v1.0.0...v1.0.1](https://github.com/claytongf/laravel-world-seed/compare/v1.0.0...v1.0.1)
 
 ## v1.0.0
 
-- First Release as it should be
-- World Remove command has been added.
-- World Add Command fixed
+- Initial stable release.
+- Added `world:remove` command.
+- Fixed `world:add` command.
 
 **Full Changelog**: [v0.1.7...v1.0.0](https://github.com/claytongf/laravel-world-seed/compare/v0.1.7...v1.0.0)
 
 ## v0.1.7
 
-- Countries translations are now in the new Model Translation. They are no longer in json field into Country Model
-- Fix support for MySQL and PostgreSQL
+- Migrated country translations to the new model translation feature. They are no longer stored in the JSON field of the `Country` model.
+- Added support for MySQL and PostgreSQL.
 
 **Full Changelog**: [v0.1.6...v0.1.7](https://github.com/claytongf/laravel-world-seed/compare/v0.1.6...v0.1.7)
 
 ## v0.1.6
 
-- List countries to seed configuration option is set to [] as default option
-- json information files are no longer need to copy to database root folder
-- FileNotFoundException is triggered if the json files don´t exist
-- License is created
-- Changelog is created
-- Few updates in the documentation
+- The `list_countries_to_seed` config option now defaults to `[]`.
+- Copying JSON information files to the database root folder is no longer required.
+- A `FileNotFoundException` is thrown if the JSON files do not exist.
+- Added license file.
+- Created changelog.
+- Updated documentation.
 
 **Full Changelog**: [v0.1.5...v0.1.6](https://github.com/claytongf/laravel-world-seed/compare/v0.1.5...v0.1.6)
 
 ## v0.1.5
 
-- use of DIRECTORY_SEPARATOR in Service Provider in order to avoid issues
+- Used `DIRECTORY_SEPARATOR` in the service provider to avoid issues.
 
 **Full Changelog**: [v0.1.4...v0.1.5](https://github.com/claytongf/laravel-world-seed/compare/v0.1.4...v0.1.5)
 
 ## v0.1.4
 
-- Fix Service Provider Register
-- Namespace changes
+- Fixed service provider registration.
+- Updated namespaces.
 
 ## v0.1.3
 
-- Namespace changes
+- Updated namespaces.
 
 ## v0.1.2
 
-- Laravel 11 and 12 support
+- Added support for Laravel 11 and 12.
 
 ## v0.1.1
 
-- Testing
+- Testing version
 
 ## 0.1.0
 
-- First Release for tests
+- Initial pre-release version for testing.

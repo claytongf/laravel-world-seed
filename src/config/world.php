@@ -23,10 +23,12 @@ return [
         'languages' => 'languages',
         'timezones' => 'timezones',
         'translations' => 'translations',
+        'airports' => 'airports',
         'relationship' => [
             'countries_currencies' => 'countries_currencies',
             'countries_languages' => 'countries_languages',
             'countries_timezones' => 'countries_timezones',
+            'airports_cities' => 'airports_cities',
         ]
     ],
 
@@ -42,7 +44,8 @@ return [
             'currency_id' => 'currency_id',
             'language_id' => 'language_id',
             'timezone_id' => 'timezone_id',
-            'translation_id' => 'translation_id'
+            'translation_id' => 'translation_id',
+            'airport_id' => 'airport_id',
         ]
     ],
 
@@ -58,6 +61,17 @@ return [
     'list_countries_to_seed' => [],
 
     /*
+    *   The list of airports to seed. If empty, all airports will be seeded.
+    *   Example: you can seed only the airports you need by passing an array of airport codes.
+    *   You can use IATA codes or ICAO codes.
+    *   Example: ['ORL', 'YYZ', 'CGH'] //IATA
+    *   Example: ['KORL', 'CYYZ', 'SBSP'] //ICAO
+    *   You CAN mix both code types.
+    */
+
+    'list_airports_to_seed' => [],
+
+    /*
     *   Set show_progress_bar to true if you would like to see the progress bar while
     *   running the seeder command.
     */
@@ -65,11 +79,11 @@ return [
     'show_progress_bar' => true,
 
     /*
-    *   Set show_countries_seeding_progress to true if you would like to see the progress bar
+    *   Set show_seeding_progress to true if you would like to see the progress bar
     *   for each country while running the seeder command.
     */
 
-    'show_countries_seeding_progress' => true,
+    'show_seeding_progress' => true,
 
     /****************** NOT IMPLEMENTED YET *****************/
 
