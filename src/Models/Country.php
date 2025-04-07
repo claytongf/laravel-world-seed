@@ -80,6 +80,11 @@ class Country extends Model
         return $this->hasMany(Translation::class, config('world.column_names.relationship.country_id'));
     }
 
+    public function states(): HasMany
+    {
+        return $this->hasMany(State::class, config('world.column_names.relationship.country_id'));
+    }
+
     /****************** SCOPES *****************/
 
     public function scopeByIso($query, string $iso2, string|null $iso3 = null): void
