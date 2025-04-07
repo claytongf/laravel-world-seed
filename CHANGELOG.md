@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.1
+
+- Fixed Country - State - City relationship
+
+**Full Changelog**: [v1.1.0...v1.1.1](https://github.com/claytongf/laravel-world-seed/compare/v1.1.0...v1.1.1)
+
 ## v1.1.0
 
 - Added airport support.
