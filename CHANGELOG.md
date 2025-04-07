@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.2
+
+- Fixed State - City HasMany relationship
+
+**Full Changelog**: [v1.1.1...v1.1.2](https://github.com/claytongf/laravel-world-seed/compare/v1.1.1...v1.1.2)
+
 ## v1.1.1
 
 - Fixed Country - State - City relationship
